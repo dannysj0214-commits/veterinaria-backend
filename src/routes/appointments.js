@@ -23,7 +23,14 @@ router.post('/', auth, isCliente, async (req, res) => {
     const appointment = new Appointment({ fecha, hora, motivo, servicio, notas: notas || '', id_cliente: req.userId, id_profesional });
     await appointment.save();
     
-    await new Notification({ tipo: 'cita', titulo: 'Nueva cita', mensaje: `${req.user.nombre} solicitó una cita`, id_usuario: id_profesional }).save();
+    await new Notification({ 
+      tipo: 'cita', 
+      titulo: 'Nueva cita', 
+      mensaje: `${req.user.nombre} solicitó una cita`, 
+      leido: false,
+      link: appointment._id.toString(), // 🌟 LINK AGREGADO
+      id_usuario: id_profesional 
+    }).save();
     
     res.json({ success: true, message: 'Cita creada', data: appointment });
   } catch (error) {
@@ -49,7 +56,14 @@ router.put('/:id/estado', auth, isProfesional, async (req, res) => {
   cita.estado = estado;
   await cita.save();
   
-  await new Notification({ tipo: 'cita', titulo: `Cita ${estado}`, mensaje: `Tu cita ha sido ${estado}`, id_usuario: cita.id_cliente }).save();
+  await new Notification({ 
+    tipo: 'cita', 
+    titulo: `Cita ${estado}`, 
+    mensaje: `Tu cita ha sido ${estado}`, 
+    leido: false,
+    link: cita._id.toString(), // 🌟 LINK AGREGADO
+    id_usuario: cita.id_cliente 
+  }).save();
   
   res.json({ success: true, message: `Cita ${estado}` });
 });
