@@ -24,10 +24,10 @@ const reportesRescateRoutes = require('./src/routes/reportesRescate');
 const app = express();
 
 // ============================================================
-// CORS ampliado para Flutter (emulador Android, Chrome, red local)
+// CORS ampliado para Flutter (Chrome, emulador, celular)
 // ============================================================
 app.use(cors({
-  origin: true,
+  origin: true, // 🌟 Refleja el origen de la petición
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
@@ -73,10 +73,10 @@ app.get('/api/health', (req, res) => {
 });
 
 // ============================================================
-// CONEXIÓN A MONGODB LOCAL
+// CONEXIÓN A MONGODB (Local o Atlas)
 // ============================================================
 mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/sistema_citas')
-  .then(() => console.log('✅ Conectado a MongoDB LOCAL'))
+  .then(() => console.log('✅ Conectado a MongoDB'))
   .catch(err => console.error('❌ Error:', err));
 
 // ============================================================
