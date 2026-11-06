@@ -86,7 +86,7 @@ router.get('/:id', auth, async (req, res) => {
   }
 });
 
-// Crear reporte con Notificación Masiva (AQUÍ SE GUARDA EL LINK)
+// Crear reporte con Notificación Masiva
 router.post('/', auth, async (req, res) => {
   try {
     const {
@@ -124,7 +124,7 @@ router.post('/', auth, async (req, res) => {
 
     await reporte.save();
 
-    // 🌟 NOTIFICACIÓN MASIVA CON LINK
+    // NOTIFICACIÓN MASIVA
     try {
       const usuarios = await User.find({ _id: { $ne: req.userId } }); 
       
@@ -133,7 +133,7 @@ router.post('/', auth, async (req, res) => {
         titulo: '🚨 Nuevo Reporte de Rescate',
         mensaje: `Se ha reportado: "${titulo}" en ${ubicacion}.`,
         leido: false,
-        link: reporte._id.toString(), // 🌟 EL LINK SE GUARDA AQUÍ
+        link: reporte._id.toString(),
         id_usuario: u._id
       }));
 
@@ -150,7 +150,7 @@ router.post('/', auth, async (req, res) => {
   }
 });
 
-// Actualizar
+// 🌟 ACTUALIZAR (Agregado el Profesional)
 router.put('/:id', auth, async (req, res) => {
   try {
     const reporte = await ReporteRescate.findById(req.params.id);
@@ -160,7 +160,9 @@ router.put('/:id', auth, async (req, res) => {
 
     const esDuenio = reporte.id_usuario.toString() === req.userId.toString();
     const esAdmin = req.user.rol === 'admin';
-    if (!esDuenio && !esAdmin) {
+    const esProfesional = req.user.rol === 'profesional'; // 🌟 PERMISO AGREGADO
+
+    if (!esDuenio && !esAdmin && !esProfesional) {
       return res.status(403).json({ success: false, message: 'No autorizado' });
     }
 
@@ -199,7 +201,7 @@ router.post('/:id/seguimiento', auth, async (req, res) => {
         titulo: 'Actualización en tu reporte',
         mensaje: `Nuevo seguimiento en "${reporte.titulo}"`,
         leido: false,
-        link: reporte._id.toString(), // 🌟 LINK
+        link: reporte._id.toString(),
         id_usuario: reporte.id_usuario
       }).save();
     }
