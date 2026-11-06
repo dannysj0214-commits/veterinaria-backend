@@ -1,7 +1,7 @@
 ﻿# Instalacion y Despliegue del Backend
 
 ## Requisitos
-- Node.js 20.x
+- Node.js 20.x (Render usa 24.x actualmente)
 - Cuenta en MongoDB Atlas
 
 ## Instalacion Local
@@ -22,7 +22,7 @@
 1. Crear un Web Service en Render.
 2. Conectar el repositorio de GitHub.
 3. Build Command: npm install
-4. Start Command: node index.js
+4. Start Command: node server.js
 5. Agregar las variables de entorno en el dashboard.
 6. Deploy.
 

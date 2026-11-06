@@ -14,6 +14,7 @@
 
 ### Corregido
 - Seed de categorias apuntando a Atlas (no a local)
+- Despliegue exitoso en Render (servicio en vivo)
 
 ---
 

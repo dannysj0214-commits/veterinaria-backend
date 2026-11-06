@@ -8,7 +8,7 @@
 API REST desarrollada con **Node.js + Express + MongoDB Atlas** para el sistema de **Citas Veterinarias y Rescate de Animales**. Proyecto academico **TCC 2026-2**.
 
 > **URL de produccion:** `https://veterinaria-backend-s64b.onrender.com/api`
-> **Estado:** Desplegado en Render
+> **Estado:** Desplegado en Render (en vivo)
 
 ---
 
@@ -35,7 +35,7 @@ Backend encargado de gestionar la autenticacion, los reportes de rescate animal,
 
 | Categoria | Paquete | Version |
 |---|---|---|
-| **Runtime** | Node.js | 20.x |
+| **Runtime** | Node.js | 20.x / 24.x |
 | **Framework** | Express | ^4.22.2 |
 | **Base de datos** | MongoDB Atlas (Mongoose) | ^7.8.9 |
 | **Autenticacion** | JWT + bcryptjs | ^9.0.3 / ^2.4.3 |
@@ -71,12 +71,14 @@ veterinaria-backend/
 | | +-- admin.js
 | +-- middleware/
 | +-- auth.js
-+-- index.js
++-- server.js
 +-- seed_categorias.js
 +-- package.json
 +-- .env.example
 
 text
+
+> **Nota:** El punto de entrada es `server.js` (Render ejecuta `node server.js`).
 
 ---
 
@@ -125,7 +127,7 @@ El servidor corre en `http://localhost:5000/api`.
 
 1. Conectar el repositorio de GitHub a Render.
 2. Build Command: `npm install`
-3. Start Command: `node index.js`
+3. Start Command: `node server.js`
 4. Agregar las variables de entorno en el dashboard de Render.
 5. Deploy.
 

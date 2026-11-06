@@ -4,7 +4,7 @@
 - `routes/`: Definen los endpoints y la logica
 - `middleware/`: Validacion de JWT y permisos
 - `models/`: Esquemas Mongoose
-- `index.js`: Punto de entrada, monta rutas y conecta a MongoDB
+- `server.js`: Punto de entrada, monta rutas y conecta a MongoDB
 
 ## Autenticacion (JWT)
 1. El cliente hace `POST /api/auth/login`
@@ -22,3 +22,8 @@
 - Contrasenas hasheadas con bcryptjs (10 rounds)
 - CORS configurado para origenes permitidos
 - Validacion de inputs con express-validator
+
+## Despliegue
+- Plataforma: Render
+- Start Command: `node server.js`
+- URL: `https://veterinaria-backend-s64b.onrender.com/api`
